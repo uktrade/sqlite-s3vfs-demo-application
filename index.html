@@ -32,6 +32,10 @@
   <div class="govuk-width-container ">
     <main class="govuk-main-wrapper " id="main-content" role="main">
       <h1 class="govuk-heading-xl">Hello</h1>
+
+      {% for message in messages %}
+        <p>{{ message}}</p>
+      {% endfor %}
     </main>
   </div>
 

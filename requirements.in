@@ -1,2 +1,5 @@
+apsw-wheels
+boto3
 flask
 gunicorn
+sqlite-s3vfs
