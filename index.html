@@ -31,11 +31,19 @@
 
   <div class="govuk-width-container ">
     <main class="govuk-main-wrapper " id="main-content" role="main">
-      <h1 class="govuk-heading-xl">Hello</h1>
 
-      {% for message in messages %}
-        <p>{{ message}}</p>
-      {% endfor %}
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          <h1 class="govuk-heading-xl">Hello</h1>
+
+          {% for message, author, posted in messages %}
+            <div class="govuk-inset-text">
+              <p class="govuk-body-l">{{ message }}</p>
+              <p class="govuk-body">{{ author }} posted on {{ posted }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
     </main>
   </div>
 
