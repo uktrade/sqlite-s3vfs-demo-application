@@ -1,7 +1,7 @@
 import os
 import json
 
-from flask import Flask, render_template
+from flask import Flask, redirect, request, render_template
 import apsw
 import boto3
 import sqlite_s3vfs
@@ -17,8 +17,15 @@ bucket = boto3.Session(
 ).resource('s3').Bucket(s3_credentials['bucket_name'])
 s3vfs = sqlite_s3vfs.S3VFS(bucket=bucket)
 
-@app.route('/', methods=['GET'])
+
+@app.route('/', methods=['GET', 'POST'])
 def handle_request():
+    return \
+        handle_get() if request.method == 'GET' else \
+        handle_post()
+
+
+def handle_get():
     with apsw.Connection('guestbook.sqlite', vfs=s3vfs.name) as db:
         cursor = db.cursor()
         cursor.execute('''
@@ -36,3 +43,14 @@ def handle_request():
         'index.html',
         messages=messages,
     ), 200)
+
+
+def handle_post():
+    with apsw.Connection('guestbook.sqlite', vfs=s3vfs.name) as db:
+        cursor = db.cursor()
+        cursor.execute('''
+            INSERT INTO messages(message, author, posted)
+            VALUES (?, ?, datetime('now'))
+        ''', (request.form['your-message'], request.form['your-name']))
+
+    return redirect('/')

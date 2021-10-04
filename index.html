@@ -34,12 +34,37 @@
 
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-two-thirds">
-          <h1 class="govuk-heading-xl">Hello</h1>
+          <h1 class="govuk-heading-xl">Sign the guest book</h1>
+
+          <form action="/" method="POST">
+            <div class="govuk-form-group">
+              <label class="govuk-label" for="your-name">
+                What's your name?
+              </label>
+              <input class="govuk-input" id="your-name" name="your-name" type="text">
+            </div>
+            <div class="govuk-form-group">
+              <label class="govuk-label" for="your-message">
+                What's your message?
+              </label>
+              <textarea class="govuk-textarea" id="your-message" name="your-message" rows="5"></textarea>
+            </div>
+            <button class="govuk-button" data-module="govuk-button" type="submit">
+              Sign
+            </button>
+          </form>
+
+          <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+
+          <h1 class="govuk-heading-l">Previous messages</h1>
 
           {% for message, author, posted in messages %}
             <div class="govuk-inset-text">
               <p class="govuk-body-l">{{ message }}</p>
-              <p class="govuk-body">{{ author }} posted on {{ posted }}</p>
+              <p class="govuk-body">
+                {{ author }}<br>
+                {{ posted }}
+              </p>
             </div>
           {% endfor %}
         </div>
