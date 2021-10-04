@@ -23,7 +23,7 @@
     <div class="govuk-header__container govuk-width-container">
       <div class="govuk-header__content">
         <a href="#" class="govuk-header__link govuk-header__link--service-name">
-          SQLite S3 Virtual Filesystem Demo
+          90s Guestbook
         </a>
       </div>
     </div>
@@ -60,7 +60,7 @@
 
           {% for message, author, posted in messages %}
             <div class="govuk-inset-text">
-              <p class="govuk-body-l">{{ message }}</p>
+              <p class="govuk-body-l">{{ message | nl2br }}</p>
               <p class="govuk-body">
                 {{ author }}<br>
                 {{ posted }}

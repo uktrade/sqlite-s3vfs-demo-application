@@ -6,6 +6,8 @@ import apsw
 import boto3
 import sqlite_s3vfs
 
+from jinja2 import evalcontextfilter
+from markupsafe import Markup, escape
 
 app = Flask(__name__, template_folder=os.path.dirname(__file__))
 
@@ -16,6 +18,14 @@ bucket = boto3.Session(
     region_name=s3_credentials['aws_region']
 ).resource('s3').Bucket(s3_credentials['bucket_name'])
 s3vfs = sqlite_s3vfs.S3VFS(bucket=bucket)
+
+@app.template_filter()
+@evalcontextfilter
+def nl2br(eval_ctx, value):
+    result = escape(value).replace('\n', Markup('<br>'))
+    if eval_ctx.autoescape:
+        result = Markup(result)
+    return result
 
 
 @app.route('/', methods=['GET', 'POST'])
