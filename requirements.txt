@@ -42,7 +42,7 @@ six==1.16.0
     # via python-dateutil
 sqlite-s3vfs==0.0.20
     # via -r requirements.in
-urllib3==1.26.7
+urllib3==1.26.17
     # via botocore
 werkzeug==2.3.3
     # via flask
