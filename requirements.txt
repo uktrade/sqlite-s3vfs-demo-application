@@ -44,7 +44,7 @@ sqlite-s3vfs==0.0.20
     # via -r requirements.in
 urllib3==1.26.18
     # via botocore
-werkzeug==2.3.3
+werkzeug==3.0.1
     # via flask
 
 # The following packages are considered to be unsafe in a requirements file:
